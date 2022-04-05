@@ -22,11 +22,10 @@ function dateDiff (start, end) {
 $form.addEventListener('submit', function(e){
     e.preventDefault()
 
-    //set Items 
+    //Stores data localStorage
     localStorage.setItem('targets', $title.value)
     localStorage.setItem('target', $datetime.value)
     
-
 
     timer = setInterval(function(){
         const now = new Date()
@@ -43,7 +42,7 @@ $form.addEventListener('submit', function(e){
     $clear.style.display = 'block'
 })
 
-
+//retrieve data from localStorage
 const ls = localStorage.getItem('target')
 
 if(ls){
@@ -60,7 +59,7 @@ if(ls){
     $clear.style.display = 'block'
 }
 
-//adds click event to clear button
+//adds click event to clear the countdown
 $clear.addEventListener('click', function(e){
     clearInterval(timer)
     localStorage.removeItem('target')
