@@ -1,0 +1,28 @@
+html, body{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+}
+
+.saved{
+    font-family:monospace;
+    font-size: 5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.countdown{
+    font-family:monospace;
+    font-size: 5rem;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.clear{
+    display: none;
+}
+
