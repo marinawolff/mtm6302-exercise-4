@@ -22,10 +22,9 @@ function dateDiff (start, end) {
 $form.addEventListener('submit', function(e){
     e.preventDefault()
 
-    //Stores data localStorage
-    localStorage.setItem('targets', $title.value)
-    localStorage.setItem('target', $datetime.value)
-    
+    //Stores data in localStorage
+    localStorage.setItem('title', $title.value)
+    localStorage.setItem('datetime', $datetime.value)
 
     timer = setInterval(function(){
         const now = new Date()
@@ -33,8 +32,7 @@ $form.addEventListener('submit', function(e){
 
         const diff = dateDiff(now, target)
 
-        // const title = localStorage.getItem('targets')
-        // $saved.innerHTML = title
+        $saved.textContent = $title.value
         $countdown.innerHTML = `${diff.days}d : ${diff.hours}h : ${diff.minutes}m : ${diff.seconds}s`
     })
 
@@ -42,19 +40,22 @@ $form.addEventListener('submit', function(e){
     $clear.style.display = 'block'
 })
 
-//retrieve data from localStorage
-const ls = localStorage.getItem('target')
+//retrieve data from localStorage / Refresh the page
+const ls = localStorage.getItem('datetime')
+const title = localStorage.getItem('title')
 
 if(ls){
+
     timer = setInterval(function(){
         const now = new Date()
         const target = new Date(ls)
 
         const diff = dateDiff(now, target)
 
-        $saved.innerHTML = $title
+        $saved.textContent = title
         $countdown.innerHTML = `${diff.days}d : ${diff.hours}h : ${diff.minutes}m : ${diff.seconds}s`
     })
+
     $form.style.display = 'none'
     $clear.style.display = 'block'
 }
@@ -62,7 +63,14 @@ if(ls){
 //adds click event to clear the countdown
 $clear.addEventListener('click', function(e){
     clearInterval(timer)
-    localStorage.removeItem('target')
-    $countdown.innerHTML = '00:00:00:00'
+
+    localStorage.removeItem('datetime')
+    localStorage.removeItem('title')
+
+    $form.reset()
+
+    $saved.innerHTML = ''
+    $countdown.innerHTML = ''
+    $form.style.display = 'block'
     $clear.style.display = 'none'
 })
